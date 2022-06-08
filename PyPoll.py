@@ -54,26 +54,53 @@ with open(infile) as edat:
         candidate_votes[candidate_name] += 1
 
 
-# calculate the % of votes for each candidate
-for c in candidate_options:
+# write results to output file
+with open(outfile, "w") as txt_file:
 
-    num_votes = candidate_votes[c]
-    percent_votes = num_votes / total_votes * 100
-    # print(f"{c} received {percent_votes:.1f}% of the total vote")
-    
-    print(f"{c}: {percent_votes:.1f}% ({num_votes:,})\n")
+    election_results = (
+        f"\nElection Results\n\n"
+        f"-------------------------\n"
+        f"Total votes: {total_votes:,}\n"
+        f"-------------------------\n\n")
 
-    if (num_votes > winning_count) and (percent_votes > winning_percent):
-        winning_count = num_votes
-        winning_percent = percent_votes
-        winner = c
+    # print  final vote count to  terminal
+    print(election_results, end="")
 
-winner_summary = (
-    f"------------------------\n"
-    f"Winner: {winner}\n"
-    f"Winning vote count: {winning_count:,}\n"
-    f"Winning percentage: {winning_percent:.1f}%\n"
-    f"------------------------\n"
-    )
+    # save final vote count to the text file.
+    txt_file.write(election_results)
 
-print(winner_summary)
+    # calculate the % of votes for each candidate
+    for c in candidate_options:
+
+        num_votes = candidate_votes[c]
+        percent_votes = num_votes / total_votes * 100
+        # print(f"{c} received {percent_votes:.1f}% of the total vote")
+        
+        # output candidate's results to the terminal
+        candidate_results = f"{c}: {percent_votes:.1f}% ({num_votes:,})\n"
+        print(candidate_results)
+
+        # save candidate results to the output file
+        txt_file.write(candidate_results)
+        txt_file.write(f"\n")
+
+        # decide the winner based on vote count and percentage
+        if (num_votes > winning_count) and (percent_votes > winning_percent):
+            winning_count = num_votes
+            winning_percent = percent_votes
+            winner = c
+
+    winner_summary = (
+        f"------------------------\n"
+        f"Winner: {winner}\n"
+        f"Winning vote count: {winning_count:,}\n"
+        f"Winning percentage: {winning_percent:.1f}%\n"
+        f"------------------------\n"
+        )
+
+    # output winner summary to terminal
+    print(winner_summary)
+
+    # save winner summary to text file
+    txt_file.write(winner_summary)
+
