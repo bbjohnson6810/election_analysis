@@ -1,38 +1,37 @@
 # election_analysis
 
-## 1. Project Overview
+## 1. Overview of Election Audit
 
 Here, I used Python to analyze Colorado Board of Elections data from an audit of a recent local congressional election.
-The following results were requested from the data:
+The purpose of this analysis was to quantify vote tallies for each county in the precinct (by raw count and percentage)
+and for each candidate to determine the winner of the vote.
 
-1. The total number of votes cast
-2. A complete list of candidates who received votes
-3. The total number of votes received by each candidate
-4. The percentage of votes won by each candidate
-5. The winner of the election based on popular vote
 
-## 2. Resources
- - Data source: election_results.csv
- - Code: PyPoll.py
- - Software: Python v3.8.8, Visual Studio Code 1.67.2
+## 2. Election Audit Results
 
-## 3. Results Overview
-
-Raw results can be found in the file ```analysis/election_analysis.txt``` 
+Raw results can be found in the output file ```analysis/election_analysis.txt``` 
 
 The analysis shows that:
 - 369,711 total votes were cast in the election
-- There were three candidates, each with the following percentage (and number) of votes:
+- Of three counties in the district:
+	- Arapahoe county constituted 6.7% of the vote (24,801 votes)
+	- Jefferson county constituted 10.5% of the vote (38,855 votes)
+	- Dever county constituted 82.8% of the vote (306,055 votes)
+
+- Denver county had the largest number of votes
+
+- The three candidates received the following vote totals:
 	- Charles Casper Stockham: 23.0% (85,213)
 	- Diana DeGette: 73.8% (272,892)
 	- Raymon Anthony Doane: 3.1% (11,606)
+	
 - The winner of the election was Diana DeGette, with 73.8% of the vote 
 
-## 4. Methods Overview
+## 3. Election Audit Summary
 
-In general terms, I counted votes by iterating through the dataset with a for loop. 
-Counting the total rows in the dataset yielded the total number of votes, 
-and counting the number of rows with each candidate's name yielded the vote count for each candidate. 
-I divided each candidate's vote count by the total vote count to calculate vote percentages, 
-then identified the winner of the election as the candidate with the highest number and percentage of votes.
-Refer to the code in ```PyPol.py``` for details.
+This Python script produces results for this specific election, but can be easily adapted for other elections with minor changes to the code.
+The loops through libraries containing county or candidate names and vote tallies are coded to run independent of library size,
+meaning they will run as-is for any number of counties or candidates. The only major changes necessary to the code for future analyses 
+will be to change the input file name and/or file structure needed to read in the data and output results to a new file.
+Note, however, that the raw data must contain a header with county names in the 2nd column and candidate names in the 3rd column
+in order to function properly.
